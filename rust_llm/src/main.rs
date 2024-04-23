@@ -1,15 +1,13 @@
 use lambda_http::{run, service_fn, tracing, Body, Error, Request, RequestExt, Response};
 use std::{convert::Infallible, io::Write, path::PathBuf};
 
-
 // Model inference function
 fn infer(prompt: String) -> Result<String, Box<dyn std::error::Error>> {
     let tokenizer_source = llm::TokenizerSource::Embedded;
     let model_architecture = llm::ModelArchitecture::GptNeoX;
-   
+
     // Path to the model
     let model_path = PathBuf::from("src/pythia-410m-q4_0-ggjt.bin");
-
 
     let prompt = prompt.to_string();
     let model = llm::load_dynamic(
@@ -86,4 +84,3 @@ async fn main() -> Result<(), Error> {
 
     run(service_fn(function_handler)).await
 }
-

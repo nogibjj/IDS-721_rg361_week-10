@@ -11,6 +11,6 @@ FROM public.ecr.aws/lambda/provided:al2-arm64
 WORKDIR /rust_llm
 
 COPY --from=builder /usr/app/target/ ./
-COPY --from=builder /usr/app/src/pythia-410m-q4_0-ggjt.bin ./
+COPY --from=builder /usr/app/src/pythia-1b-q4_0-ggjt.bin ./
 
-ENTRYPOINT ["/lambda-entrypoint.sh"]
+ENTRYPOINT ["/rust_llm/lambda/rust_llm/bootstrap"]

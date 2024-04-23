@@ -7,7 +7,7 @@ fn infer(prompt: String) -> Result<String, Box<dyn std::error::Error>> {
     let model_architecture = llm::ModelArchitecture::GptNeoX;
 
     // Path to the model
-    let model_path = PathBuf::from("src/pythia-410m-q4_0-ggjt.bin");
+    let model_path = PathBuf::from("src/pythia-1b-q4_0-ggjt.bin");
 
     let prompt = prompt.to_string();
     let model = llm::load_dynamic(

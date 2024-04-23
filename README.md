@@ -3,7 +3,7 @@
 
 ## Overview
 
-In this project we will deploy a simple rust fuction which uses a LLMs from huggingface to continue the text given to it. The function will be deployed as a lambda function on AWS.
+In this project we will deploy a simple rust fuction which uses an LLM from huggingface to continue the text given to it. The function will be deployed as a lambda function on AWS.
 
 ## Prerequisites
 Make sure you have the following installed:
@@ -31,25 +31,52 @@ cargo lambda watch
 ![local test](/resources/local_start.png)
 
 5. We can use services like postman to send and receive the requests from the lambda function.  
+
+6. Once the functionality is working as expected, make the production build
+
+
+## App deployment
+
+### Docker Image Creation
+1. Do docker init in the project directory
+2. modify the Dockerfile as required
+3. Build the docker image  
+![docker build](/resources/docker_build.png)
+
+4. verify that the image is created either using the docker images command or viewing in the docker desktop
+![docker image](/resources/docker_image.png)
+
+### AWS ECR
+
+We will use AWS ECR service to store our docker image so that we can use it to build the lambda function.
+1. Create a new **private** repository in ECR
+2. once the repository is created, click on the "view push commands" button to get the commands to push the image to the repository
+3. Run the commands in the terminal to push the image to the repository
+![push image](/resources/docker_push.png)
+4. Verify that the image is pushed to the repository by checking the repository in the AWS console
+![ECR image](/resources/ecr.png)
+5. copy the URI of the image to use it in the lambda function
+
+### AWS Lambda Function
+
+1. Go to AWS lambda and create a new function
+2. select the container image as the source
+3. paste the URI of the image we copied earlier in the repository URI
+4. select the other settings as required
+![lambda settings](/resources/lambda_setup.png)
+5. Create the function
+6. Once the function is created, goto configurations and enable function URL
+7. The lambda function is now ready to be used
+![lambda function](/resources/lambda_func.png)
+
+
+## Sample Output
+
 With no query, uses the default starter:  
 ![no query](/resources/local_auto.png)
 
 With a query:
 ![with query](/resources/local_custom.png)
-
-6. Once the functionality is working as expected, make the production build
-
-7. use Docker to dockerize the function along with the model file
-
-## App deployment
-
-1. Upload the docker image to AWS ECR
-2. Go to AWS lambda and create a new function
-3. select the container image as the source
-4. provide the ECR image URI
-5. Set the memory and timeout as required (suggested to set higher since the model takes time to load)
-6. Create the function
-
 
 ## GitHub Actions
 Github Actions is used to automatically perform functions like Linting, formatting etc. whenever there is an update in the repository.

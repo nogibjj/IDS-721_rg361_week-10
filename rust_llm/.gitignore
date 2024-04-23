@@ -1,0 +1,7 @@
+/target
+
+#Mac-OS
+.DS_Store
+
+#Ignoring the model file
+*.bin

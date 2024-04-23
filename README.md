@@ -53,3 +53,4 @@ With a query:
 
 ## GitHub Actions
 Github Actions is used to automatically perform functions like Linting, formatting etc. whenever there is an update in the repository.
+![CI/CD](/resources/cicd.png)

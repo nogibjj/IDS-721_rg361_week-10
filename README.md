@@ -1,4 +1,5 @@
 # Rust Serverless Transformer
+[![CI/CD](https://github.com/nogibjj/IDS-721_rg361_week-10/actions/workflows/cicd.yml/badge.svg)](https://github.com/nogibjj/IDS-721_rg361_week-10/actions/workflows/cicd.yml)
 
 ## Overview
 
@@ -27,8 +28,14 @@ don't forget to add the correct path to the model in the file
 ```bash
 cargo lambda watch
 ```
+![local test](/resources/local_start.png)
 
-5. We can use services like postman to send and receive the requests from the lambda function.
+5. We can use services like postman to send and receive the requests from the lambda function.  
+With no query, uses the default starter:  
+![no query](/resources/local_auto.png)
+
+With a query:
+![with query](/resources/local_custom.png)
 
 6. Once the functionality is working as expected, make the production build
 
